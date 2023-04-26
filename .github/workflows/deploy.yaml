@@ -28,56 +28,36 @@ jobs:
           key:  ${{ env.AWS_SSH_KEY_PRIVATE }}
           username: ${{ env.SERVER_USERNAME }}
           script: |
-          echo "************************************"
-          echo "Successfully logged on to AWS SERVER"
-          echo "************************************"
-          sudo apt-get update
-          sudo apt-get install nodejs npm -y
-          sudo npm install -g pm2 -y
-          sudo pm2 startup systemd
-          echo "******************************************"
-          echo "Successfully Install Node and PM2 Packages"
-          echo "******************************************"
-          
-          sudo apt-get install -y nginx
-          sudo systemctl start nginx
-          sudo systemctl enable nginx
-          echo "**************************"
-          echo "Successfully Install NGINX"
-          echo "**************************"
-          
-          sudo ls -al
-          cd client
-          sudo npm install
-          
-          sudo ufw enable
-          sudo ufw allow OpenSSH
-          sudo ufw allow 'Nginx Full'
-          sudo ufw --force enable 
-          echo "*****************************"
-          echo "Firewall Sucessfully Enabled!"
-          echo "*****************************"
+            sudo apt-get update
+            sudo apt-get install nodejs npm -y
+            sudo npm install -g pm2 -y
+            sudo pm2 startup systemd
 
-          sudo npm build
-          sudo pm2 serve build/ 3000 -f --name=frontend --spa
-          sudo pm2 restart frontend
-          echo "**************************"
-          echo "PM2 Sucessfully Restarted!"
-          echo "**************************"
+            sudo apt-get install -y nginx
+            sudo systemctl start nginx
+            sudo systemctl enable nginx
 
+            sudo ls -al
+            cd client
+            sudo npm install
 
-          # echo "**********************************************************"
-          # echo "Remove the default config file and replace with new config"
-          # echo "**********************************************************"
-          # sudo rm /etc/nginx/sites-available/default
-          # sudo cp config /etc/nginx/sites-available/ -r
+            sudo ufw enable
+            sudo ufw allow OpenSSH
+            sudo ufw allow 'Nginx Full'
+            sudo ufw --force enable 
 
-          # echo "******************************"
-          # echo "Kill and Restart PM2 and Nginx"
-          # echo "******************************"
-          # sudo pm2 kill
-          # pm2 start frontend
-          # sudo systemctl kill nginx || true
-          # sudo systemctl restart nginx
-          
-      
+            sudo npm build
+            sudo pm2 serve build/ 3000 -f --name=frontend --spa
+            sudo pm2 restart frontend
+
+            # sudo rm /etc/nginx/sites-available/default
+            # sudo cp config /etc/nginx/sites-available/ -r
+
+            # echo "******************************"
+            # echo "Kill and Restart PM2 and Nginx"
+            # echo "******************************"
+            # sudo pm2 kill
+            # pm2 start frontend
+            # sudo systemctl kill nginx || true
+            # sudo systemctl restart nginx
+
