@@ -50,14 +50,14 @@ jobs:
             sudo pm2 serve build/ 3000 -f --name=frontend --spa
             sudo pm2 restart frontend
 
-            # sudo rm /etc/nginx/sites-available/default
-            # sudo cp config /etc/nginx/sites-available/ -r
+            sudo rm /etc/nginx/sites-available/default
+            sudo cp config /etc/nginx/sites-available/ -r
 
-            # echo "******************************"
-            # echo "Kill and Restart PM2 and Nginx"
-            # echo "******************************"
-            # sudo pm2 kill
-            # pm2 start frontend
-            # sudo systemctl kill nginx || true
-            # sudo systemctl restart nginx
+            echo "******************************"
+            echo "Kill and Restart PM2 and Nginx"
+            echo "******************************"
+            sudo pm2 kill
+            pm2 start frontend
+            sudo systemctl kill nginx || true
+            sudo systemctl restart nginx
 
