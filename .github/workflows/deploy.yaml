@@ -36,9 +36,8 @@ jobs:
             sudo apt-get install -y nginx
             sudo systemctl start nginx
             sudo systemctl enable nginx
-
-            sudo ls -al
             git clone https://github.com/husseinalamutu/client.git
+            sudo ls -al
             cd client
             sudo npm install
 
