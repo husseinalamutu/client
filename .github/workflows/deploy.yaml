@@ -1,4 +1,4 @@
-name: Memories App Build & Deploy
+name: Frontend App
 on:
   push:
     branches: ["main"]
