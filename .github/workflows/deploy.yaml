@@ -46,7 +46,7 @@ jobs:
             sudo ufw allow 'Nginx Full'
             sudo ufw --force enable 
 
-            sudo npm build
+            sudo npm run build
             sudo pm2 serve build/ 3000 -f --name=frontend --spa
             sudo pm2 restart frontend
 
