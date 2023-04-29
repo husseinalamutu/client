@@ -39,8 +39,8 @@ jobs:
             sudo ufw allow 'Nginx Full'
             sudo ufw --force enable 
             cd /home/ubuntu
-            sudo rm -rf memories-client || true
-            git clone https://github.com/eniolastyle/memories-client.git
+            sudo rm -rf client || true
+            git clone https://github.com/husseinalamutu/client.git
             cd memories-client
             npm install
             rm -rf build
