@@ -14,20 +14,16 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
+    steps:  
       - name: Checkout
-        uses: actions/Checkout@v3
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v2
+        uses: actions/Checkout@v2
+      - name: SSH to server for deployment
+        uses: appleboy/ssh-action@master
         with:
-          node-version: '12.x'
-      - name: SSH
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ env.SERVER_PUBLIC_IP }}
-          key:  ${{ env.AWS_SSH_KEY_PRIVATE }}
-          username: ${{ env.SERVER_USERNAME }}
-          script: |
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME}}
+          key: ${{ secrets.AWS_PRIVATE_KEY }}
+          script: |-
             sudo apt-get update
             sudo apt-get install git -y
             echo "--NODE & NPM--"
@@ -43,9 +39,9 @@ jobs:
             sudo ufw allow 'Nginx Full'
             sudo ufw --force enable 
             cd /home/ubuntu
-            sudo rm -rf client || true
-            git clone https://github.com/husseinalamutu/client.git
-            cd client
+            sudo rm -rf memories-client || true
+            git clone https://github.com/eniolastyle/memories-client.git
+            cd memories-client
             npm install
             rm -rf build
             npm run build
@@ -54,6 +50,5 @@ jobs:
             pm2 serve build/ 3000 -f --name "react-build" --spa
             sudo rm -rf /etc/nginx/sites-available/default
             sudo cp default /etc/nginx/sites-available/ -r
-            sudo systemctl kill nginx || true
-            sudo systemctl start nginx
+            sudo systemctl restart nginx
 
