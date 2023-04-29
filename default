@@ -3,6 +3,6 @@ server {
     server_name _;
 
     localhost / {
-        proxy_pass http://localhost:3000;
+        proxy_pass 54.153.71.122:3000;
     }
 }
