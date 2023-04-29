@@ -39,9 +39,11 @@ jobs:
             sudo ufw allow 'Nginx Full'
             sudo ufw --force enable 
             cd /home/ubuntu
+            pm2 stop react-build
+            pm2 delete react-build
             sudo rm -rf client || true
             git clone https://github.com/husseinalamutu/client.git
-            cd memories-client
+            cd client
             npm install
             rm -rf build
             npm run build
@@ -51,4 +53,3 @@ jobs:
             sudo rm -rf /etc/nginx/sites-available/default
             sudo cp default /etc/nginx/sites-available/ -r
             sudo systemctl restart nginx
-
