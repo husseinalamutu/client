@@ -20,9 +20,9 @@ jobs:
       - name: SSH to server for deployment
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_PUBLIC_IP }}
-          username: ${{ secrets.USERNAME}}
-          key: ${{ secrets.AWS_PRIVATE }}
+          host: ${{ env.SERVER_PUBLIC_IP }}
+          username: ${{ env.USERNAME}}
+          key: ${{ env.AWS_PRIVATE }}
           script: |-
             sudo apt-get update
             sudo apt-get install git -y
